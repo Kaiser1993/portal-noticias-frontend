@@ -1,0 +1,16 @@
+@startuml
+left to right direction 
+actor Aluno
+actor Professor
+actor Coordenador 
+rectangle "Sistema Escolar" {
+    usecase "aluno consulta notas" as uca
+    usecase "professor registra notas" as ucp1
+    usecase "professor consulta turmas" as ucp2
+ usecase "coordenador cadastra disciplinas" as ucc
+}
+Aluno --> uca
+Professor --> ucp1
+Professor --> ucp2
+Coordenador --> ucc
+@enduml
