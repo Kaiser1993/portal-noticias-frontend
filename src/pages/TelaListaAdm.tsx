@@ -1,17 +1,24 @@
 import { useEffect, useState } from "react";
 import MenuAdm from "../components/MenuAdm";
-import { useAdm } from "../hooks/useAdm";
+import { useAdm } from "../hooks/useAdm_pg";
 import { useNavigate } from "react-router";
-import useLogin from "../hooks/useLogin";
+import useLogin from "../hooks/useLogin_pg";
+import type Administrador from "../interfaces/Administrador";
 
 export function TelaListaAdm(){
     const {verificarUsarioLogado} = useLogin();
     const {buscarAdministradores, excluirAdministrador} = useAdm()
-    const [listaAdministradores, setListaAdministradores] = useState(buscarAdministradores());
+    const [listaAdministradores, setListaAdministradores] = useState<Administrador[]>([]);
+
 const navigate = useNavigate();
     
 useEffect(() => {
     verificarUsarioLogado();
+
+buscarAdministradores().then((dados: Administrador[]) => {
+setListaAdministradores(dados)
+})
+
 })
 
     return(
@@ -62,7 +69,10 @@ state: { administrador}
             const confirmar = window.confirm("Deseja excluir o administrador " + administrador.nome + "?");
             if(confirmar){
 excluirAdministrador(administrador.id);
-setListaAdministradores(buscarAdministradores());
+buscarAdministradores().then((dados: Administrador[]) => {
+setListaAdministradores(dados)
+})
+
             }
         }}>
             Excluir

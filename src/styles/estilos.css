@@ -31,6 +31,10 @@ background-color: lightgrey;
 }
 
 .menu {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
     text-align: center;
 padding: 0.2em;
 background-color: lightgray;
